@@ -1,4 +1,4 @@
-# Your Name: Nadia Schuld t
+# Your Name: Nadia Schuld
 
 def main():
   while True:
