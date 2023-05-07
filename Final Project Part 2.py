@@ -79,35 +79,6 @@ def menu():
       else:
         print("Please enter a valid menu selection: ")
 
-def getUserInputDates():
-  getAvailableDates()
-
-def getAvailableDates():
-  openCDCfile()
-  minDate = 
-
-def reportSingleStateByDate():
-  userState = input('Please enter your selected state: ')
-  getUserInputDates()
-  reportStateDate = open('Mortality_For_State_By_Date_Range_Report.txt')
-
-def totalMortalityByState():
-  reportMortalityState = open('Mortality_Summary_For_All_States_By_Date_Range_Report.txt')
-  
-
-def printLineDetailReport(fileHandler,State,totalDeathSum,totalNaturalCause,totalC19MC,totalC19UC):
-  #totalDeathSum = str(totalDeathSum)
-  #totalNaturalCause = str(totalNaturalCause)
-  #totalC19MC = str(totalC19MC)
-  #totalC19UC = str(totalC19UC)
-
-def getHighestMortality():
-  #highestMortality = max(mortality)
-  #maxWeek = dates[mortality.index(highestMortality)]
-  #maxState = state[mortality.index(highestMortality)]
-  #maxNaturalCause = nC[mortality.index(highestMortality)]
-  #covidPercentage = highestMortality / maxNaturalCause * 100
-  #print('This represents ', covidPercentage, '% of the toatl reported deaths in ', maxState, ' that week.', sep='')
 
 def openCDCfile():
   dataFromFile = open('cdc.csv', 'r')
@@ -118,7 +89,6 @@ def openCDCfile():
       modifiedCDCFile.write(line)
   modifiedCDCFile.close() 
   return modifiedCDCFile
-
 
 def defaultReport(modifiedCDCFile):
   modifiedCDCFile = open('cdc.csv','r')
@@ -143,6 +113,54 @@ def defaultReport(modifiedCDCFile):
     newFile.write(f'\n{line}\n')
   print('\nFull Report Posted')  
 
+def getUserInputDates():
+  pass
+  #getAvailableDates()
+
+def getAvailableDates():
+ pass
+  #openCDCfile()
+  #minDate = 
+
+def reportSingleStateByDate():
+  pass
+  #userState = input('Please enter your selected state: ')
+  #getUserInputDates()
+  #reportStateDate = open('Mortality_For_State_By_Date_Range_Report.txt')
+
+def totalMortalityByState():
+ pass
+  #reportMortalityState = open('Mortality_Summary_For_All_States_By_Date_Range_Report.txt')
+  
+
+def printLineDetailReport(fileHandler,State,totalDeathSum,totalNaturalCause,totalC19MC,totalC19UC):
+  pass
+  #totalDeathSum = str(totalDeathSum)
+  #totalNaturalCause = str(totalNaturalCause)
+  #totalC19MC = str(totalC19MC)
+  #totalC19UC = str(totalC19UC)
+
+def getHighestMortality():
+  dataFromFile = open('cdc.csv','r')
+  dataLines = dataFromFile.readlines()
+  state = []
+  dates = []
+  naturalCause = []
+  mortality = []
+  for line in dataLines:
+    line = line.rstrip()
+    s,_,_,w,_,nC,_,_,_,_,_,_,_,_,_,_,_,_,uC = line.split(',')
+    state.append(s)
+    dates.append(w)
+    naturalCause.append(nC)
+    mortality.append(int(uC))
+  highestMortality = max(mortality)
+  maxWeek = dates[mortality.index(highestMortality)]
+  maxState = state[mortality.index(highestMortality)]
+  maxNaturalCause = nC[mortality.index(highestMortality)]
+  covidPercentage = highestMortality / maxNaturalCause * 100
+  print('The largest number of deaths directly attributible to COVID 19 in this report range was ', highestMortality, ' in ', maxState, ' during the week of ', maxWeek, '.', sep = '')
+  print('This represents ', covidPercentage, '% of the toatl reported deaths in ', maxState, ' that week.', sep='')
 
 # ----------------------------------------------------------------------
 # Put all of your code ABOVE this block of code
